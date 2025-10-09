@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onyx | Lounge & Bar - Ranchi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind CSS */
+        body {
+            background-color: #050505;
+            font-family: 'Poppins', sans-serif;
+            color: #E0E0E0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        /* --- Custom Animations --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- New Thunder Glitch Effect --- */
+        .glitch {
+            position: relative;
+            color: #D4AF37; /* Gold color from logo */
+        }
+        .glitch-active span {
+            position: relative;
+            display: inline-block;
+            animation: thunder-shake 1.5s infinite;
+        }
+        .glitch-active span:nth-of-type(1) { animation-duration: 0.9s; animation-delay: 0.2s; }
+        .glitch-active span:nth-of-type(2) { animation-duration: 1.2s; animation-delay: -0.1s; }
+        .glitch-active span:nth-of-type(3) { animation-duration: 1.0s; animation-delay: 0.4s; }
+
+        @keyframes thunder-shake {
+            0%, 100% { transform: translate(0, 0) skew(0, 0); opacity: 1; }
+            5% { transform: translate(2px, -3px) skew(0, 2deg); }
+            10% { transform: translate(-1px, 2px) skew(-3deg, 0); }
+            15% { transform: translate(0, 0) skew(0, 0); }
+            40% { transform: translate(0, 0) skew(0, 0); opacity: 1; }
+            42% { opacity: 0.7; }
+            45% { opacity: 1; }
+            60% { transform: translate(3px, 1px) skew(3deg, 1deg); }
+            65% { transform: translate(0, 0) skew(0, 0); }
+            90% { transform: translate(-2px, -1px) skew(-1deg, 0); }
+        }
+
+        /* --- Shine Effect for after countdown --- */
+        @keyframes shine-effect {
+             0%, 100% { text-shadow: 0 0 8px #D4AF37, 0 0 16px #D4AF37, 0 0 24px #D4AF37; }
+             50% { text-shadow: 0 0 16px #D4AF37, 0 0 24px #D4AF37, 0 0 40px #D4AF37; }
+        }
+        .shine {
+            animation: shine-effect 2s infinite ease-in-out;
+        }
+
+        /* --- Hidden Onix Animation (DEBUG VISIBLE VERSION) --- */
+        #onix-svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            max-width: 500px; /* Control max size */
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1; /* Behind the h1 text */
+            color: #ff00ff; /* DEBUG: Bright pink to make it visible */
+            animation: peek-a-boo-debug 8s infinite ease-in-out; /* DEBUG: Faster animation */
+        }
+
+        @keyframes peek-a-boo { /* Original subtle animation */
+            0%   { transform: translate(-50%, -50%) rotate(-5deg); opacity: 0; }
+            25%  { transform: translate(-45%, -55%) rotate(0deg); opacity: 0.07; }
+            50%  { transform: translate(-55%, -48%) rotate(5deg); opacity: 0; }
+            75%  { transform: translate(-50%, -52%) rotate(-2deg); opacity: 0.09; }
+            100% { transform: translate(-50%, -50%) rotate(-5deg); opacity: 0; }
+        }
+
+        @keyframes peek-a-boo-debug { /* Faster, more visible version for testing */
+            0%   { transform: translate(-50%, -50%) rotate(-5deg); opacity: 0; }
+            25%  { transform: translate(-45%, -55%) rotate(0deg); opacity: 0.5; } /* DEBUG: More visible */
+            50%  { transform: translate(-55%, -48%) rotate(5deg); opacity: 0; }
+            75%  { transform: translate(-50%, -52%) rotate(-2deg); opacity: 0.6; } /* DEBUG: More visible */
+            100% { transform: translate(-50%, -50%) rotate(-5deg); opacity: 0; }
+        }
+
+
+        /* Custom glow button */
+        .glow-button {
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 5px #D4AF37, 0 0 10px #D4AF37;
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 15px #D4AF37, 0 0 25px #D4AF37;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header --><header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <img src="Onyx Logo.jpg" alt="Onyx Logo" class="h-10 md:h-12"
+                 onerror="this.onerror=null; this.src='https://placehold.co/200x50/050505/D4AF37?text=ONYX';">
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-sm uppercase tracking-widest hover:text-[#D4AF37] transition-colors">About</a>
+                <a href="#events" class="text-sm uppercase tracking-widest hover:text-[#D4AF37] transition-colors">Events</a>
+                <a href="#contact" class="text-sm uppercase bg-[#D4AF37] text-black py-2 px-4 rounded-sm font-bold hover:bg-white transition-colors">Book Now</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+     <!-- Mobile Menu --><div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-40 hidden flex-col items-center justify-center space-y-8">
+        <button id="close-mobile-menu" class="absolute top-8 right-8 text-3xl">&times;</button>
+        <a href="#about" class="text-lg uppercase tracking-widest">About</a>
+        <a href="#events" class="text-lg uppercase tracking-widest">Events</a>
+        <a href="#contact" class="text-lg uppercase bg-[#D4AF37] text-black py-3 px-6 rounded-sm font-bold">Book Now</a>
+    </div>
+
+    <main>
+        <!-- Hero Section --><section class="h-screen min-h-[700px] w-full flex flex-col items-center justify-center text-center relative px-4 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style="background-image: url('WhatsApp Image 2025-10-08 at 15.14.52_8bcc7c84.jpg');">
+                <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+            </div>
+            <div class="relative z-10 flex flex-col items-center">
+                
+                <!-- Hidden Onix SVG -->
+                <svg id="onix-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
+                    <path d="M63,21c-5.52,0-10,4.48-10,10s4.48,10,10,10s10-4.48,10-10S68.52,21,63,21z M86,31c-5.52,0-10,4.48-10,10s4.48,10,10,10 s10-4.48,10-10S91.52,31,86,31z M42,41c-5.52,0-10,4.48-10,10s4.48,10,10,10s10-4.48,10-10S47.52,41,42,41z M21,54 c-5.52,0-10,4.48-10,10s4.48,10,10,10s10-4.48,10-10S26.52,54,21,54z M51,63c-5.52,0-10,4.48-10,10s4.48,10,10,10s10-4.48,10-10 S56.52,63,51,63z M78,70c-5.52,0-10,4.48-10,10s4.48,10,10,10s10-4.48,10-10S83.52,70,78,70z M35,80c-5.52,0-10,4.48-10,10 s4.48,10,10,10s10-4.48,10-10S40.52,80,35,80z"></path>
+                </svg>
+
+                <h1 id="hero-glitch-text" class="glitch glitch-active text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase" data-text="ONYX HAS ARRIVED">
+                    <span>ONYX</span> <span>HAS</span> <span>ARRIVED</span>
+                </h1>
+                <p class="mt-4 text-base md:text-xl max-w-2xl text-gray-300">The future of fine dining and nightlife lands in the heart of Ranchi. Prepare for a sensory revolution.</p>
+                
+                <div class="mt-12">
+                    <h2 class="text-sm md:text-base uppercase tracking-widest text-gray-400 mb-4">Grand Opening Countdown</h2>
+                    <div id="countdown" class="grid grid-cols-4 gap-2 md:gap-4 text-center">
+                        <div><span id="days" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Days</span></div>
+                        <div><span id="hours" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Hours</span></div>
+                        <div><span id="minutes" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Mins</span></div>
+                        <div><span id="seconds" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Secs</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section --><section id="about" class="py-20 md:py-32 fade-in-section">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative rounded-lg overflow-hidden">
+                     <div class="absolute inset-0 border-2 border-[#D4AF37]/50 rounded-lg animate-pulse"></div>
+                     <img src="WhatsApp Image 2025-10-08 at 15.15.08_9f0f059c.jpg" alt="Elegant restaurant interior" class="rounded-lg">
+                </div>
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold uppercase">A Dual Reality</h2>
+                    <p class="mt-4 text-gray-400">Onyx is an experience, not just a venue. By day, indulge in a premium fine dining sanctuary where culinary art takes center stage. By night, witness the transformation as Onyx becomes the epicenter of Ranchi's underground music scene, pulsing with the energy of Techno and Boiler Room sets.</p>
+                    <p class="mt-2 text-gray-400">We are located in the vibrant heart of the city, Lalpur.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section --><section id="events" class="py-20 md:py-32 bg-black fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold uppercase text-center">Weekend Frequencies</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-gray-400">When the week ends, the system reboots. Descend into sound every weekend as we host the city's most immersive Techno and Boiler Room style parties.</p>
+                <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <!-- Techno Card --><div class="group relative rounded-lg overflow-hidden text-left h-96 flex flex-col justify-end p-8 bg-cover bg-center" style="background-image: url('WhatsApp Image 2025-10-08 at 15.15.01_a52828bd.jpg');">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-300"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold uppercase">Techno Takeover</h3>
+                        </div>
+                    </div>
+                    <!-- Boiler Room Card --><div class="group relative rounded-lg overflow-hidden text-left h-96 flex flex-col justify-end p-8 bg-cover bg-center" style="background-image: url('WhatsApp Image 2025-10-08 at 15.15.05_4de01f3b.jpg');">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-300"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold uppercase">Boiler Room Sessions</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section --><section id="contact" class="py-20 md:py-32 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold uppercase">Reserve Your Experience</h2>
+                    <p class="mt-4 text-gray-400">Secure your place at the forefront of Ranchi's dining and nightlife scene. Fill out the form below or contact us directly.</p>
+                </div>
+
+                <div class="mt-12 max-w-xl mx-auto">
+                    <form id="booking-form" class="space-y-4">
+                        <div>
+                            <input type="text" name="name" placeholder="Full Name" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="email" name="email" placeholder="Email Address" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all">
+                            <input type="tel" name="phone" placeholder="Phone Number" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <input type="date" name="date" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all text-gray-500" style="color-scheme: dark;">
+                            <input type="time" name="time" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all text-gray-500" style="color-scheme: dark;">
+                            <input type="number" name="guests" placeholder="Guests" min="1" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all">
+                        </div>
+                        <div>
+                             <textarea name="message" placeholder="Any special requests?" rows="3" class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"></textarea>
+                        </div>
+                        <div class="text-center pt-4">
+                            <button type="submit" class="glow-button uppercase font-bold bg-[#D4AF37] text-black py-3 px-12 rounded-sm transition-transform">Send Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer --><footer class="bg-black py-12">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <img src="Onyx Logo.jpg" alt="Onyx Logo" class="h-12 mx-auto mb-4"
+            onerror="this.onerror=null; this.src='https://placehold.co/200x50/050505/D4AF37?text=ONYX';">
+            <p>Lalpur, Ranchi, Jharkhand</p>
+            <p class="mt-1">&copy; <span id="year"></span> Onyx Lounge & Bar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- HEADER SCROLL EFFECT ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-black/80', 'backdrop-blur-sm');
+                } else {
+                    header.classList.remove('bg-black/80', 'backdrop-blur-sm');
+                }
+            });
+
+            // --- MOBILE MENU ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            }
+
+            mobileMenuButton.addEventListener('click', toggleMenu);
+            closeMobileMenu.addEventListener('click', toggleMenu);
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // --- COUNTDOWN TIMER & GLITCH RESOLUTION ---
+            const countDownDate = new Date("Oct 18, 2025 19:00:00").getTime();
+            const heroGlitchText = document.getElementById('hero-glitch-text');
+
+            const countdownInterval = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = `<div class="col-span-4 text-2xl font-bold uppercase text-white">Now Open</div>`;
+                    heroGlitchText.classList.remove('glitch-active'); // Remove glitch when open
+                    heroGlitchText.classList.add('shine'); // Add shine effect
+                    document.getElementById('onix-svg').style.display = 'none'; // Hide Onix
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+            }, 1000);
+
+            // --- FADE-IN ON SCROLL ---
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- BOOKING FORM ---
+            const bookingForm = document.getElementById('booking-form');
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = this.querySelector('input[name="name"]').value;
+                const messageBox = document.createElement('div');
+                messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
+                messageBox.innerHTML = `Thank you, ${name}! Your request is sent.`;
+                document.body.appendChild(messageBox);
+                setTimeout(() => {
+                    messageBox.style.transition = 'opacity 0.5s';
+                    messageBox.style.opacity = '0';
+                    setTimeout(() => document.body.removeChild(messageBox), 500);
+                }, 3000);
+                this.reset();
+            });
+
+            // --- FOOTER YEAR ---
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+        });
+    </script>
+
+</body>
+</html>
+
