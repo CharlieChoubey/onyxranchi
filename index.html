@@ -222,8 +222,8 @@
                 </div>
 
                 <div class="mt-12 max-w-xl mx-auto">
-                    <!-- The form now submits directly to your new script URL -->
-                    <form id="booking-form" method="POST" action="https://script.google.com/macros/s/AKfycbyppJEUp04yG8fq0hVkFycin1JgrneSPbMLzCQQfkMqj8oIlC2sObw3kossvoI9iWLP/exec" class="space-y-4">
+                    <!-- The form now submits to a hidden iframe to prevent the user from leaving the page -->
+                    <form id="booking-form" method="POST" action="https://script.google.com/macros/s/AKfycbyppJEUp04yG8fq0hVkFycin1JgrneSPbMLzCQQfkMqj8oIlC2sObw3kossvoI9iWLP/exec" target="hiddenConfirm" class="space-y-4">
                         <div>
                             <input type="text" name="name" placeholder="Full Name" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all">
                         </div>
@@ -248,6 +248,9 @@
         </section>
 
     </main>
+
+    <!-- Hidden iframe to capture form submission response -->
+    <iframe name="hiddenConfirm" id="hiddenConfirm" style="display: none;"></iframe>
     
     <!-- Footer --><footer class="bg-black py-12">
         <div class="container mx-auto px-6 text-center text-gray-500">
@@ -335,20 +338,29 @@
             document.querySelector('input[name="date"]').setAttribute('min', today);
 
 
-            // --- SHOW SUCCESS MESSAGE AFTER REDIRECT ---
-            if (window.location.hash === '#success') {
+            // --- SEAMLESS FORM SUBMISSION ---
+            const bookingForm = document.getElementById('booking-form');
+            bookingForm.addEventListener('submit', function() {
+                const nameInput = bookingForm.querySelector('input[name="name"]');
+                const name = nameInput ? nameInput.value : 'guest';
+
+                // Show the success message immediately
                 const messageBox = document.createElement('div');
                 messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
-                messageBox.innerHTML = 'Thank you! Your request has been sent.';
+                messageBox.innerHTML = `Thank you, ${name}! Your request is sent.`;
                 document.body.appendChild(messageBox);
                 setTimeout(() => {
                     messageBox.style.transition = 'opacity 0.5s';
                     messageBox.style.opacity = '0';
                     setTimeout(() => document.body.removeChild(messageBox), 500);
                 }, 4000);
-                // Clean the URL
-                history.replaceState(null, null, ' ');
-            }
+
+                // Reset the form after a short delay to allow submission to start
+                setTimeout(() => {
+                    bookingForm.reset();
+                    document.querySelector('input[name="date"]').setAttribute('min', new Date().toISOString().split('T')[0]);
+                }, 500);
+            });
             
             // --- FOOTER YEAR ---
             document.getElementById('year').textContent = new Date().getFullYear();
