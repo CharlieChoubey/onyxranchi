@@ -222,8 +222,8 @@
                 </div>
 
                 <div class="mt-12 max-w-xl mx-auto">
-                    <!-- The form no longer navigates away. JavaScript will handle submission. -->
-                    <form id="booking-form" class="space-y-4">
+                    <!-- The form now submits directly to your new script URL -->
+                    <form id="booking-form" method="POST" action="https://script.google.com/macros/s/AKfycbyppJEUp04yG8fq0hVkFycin1JgrneSPbMLzCQQfkMqj8oIlC2sObw3kossvoI9iWLP/exec" class="space-y-4">
                         <div>
                             <input type="text" name="name" placeholder="Full Name" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all">
                         </div>
@@ -335,59 +335,20 @@
             document.querySelector('input[name="date"]').setAttribute('min', today);
 
 
-            // --- BOOKING FORM TO GOOGLE SHEET (FINAL, RELIABLE AJAX VERSION) ---
-            const bookingForm = document.getElementById('booking-form');
-            bookingForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const form = e.target;
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-                const submitButton = form.querySelector('button');
-                
-                // This is the script URL you provided and deployed
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbyppJEUp04yG8fq0hVkFycin1JgrneSPbMLzCQQfkMqj8oIlC2sObw3kossvoI9iWLP/exec';
-
-                submitButton.disabled = true;
-                submitButton.textContent = 'SENDING...';
-
-                fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'cors', // Use cors mode for proper error handling
-                    headers: {
-                        'Content-Type': 'application/json', // Specify JSON content type
-                    },
-                    body: JSON.stringify(data) // Send data as a JSON string
-                })
-                .then(response => response.json())
-                .then(res => {
-                    if (res.result === 'success') {
-                        const name = data.name;
-                        const messageBox = document.createElement('div');
-                        messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
-                        messageBox.innerHTML = `Thank you, ${name}! Your request is sent.`;
-                        document.body.appendChild(messageBox);
-                        setTimeout(() => {
-                            messageBox.style.transition = 'opacity 0.5s';
-                            messageBox.style.opacity = '0';
-                            setTimeout(() => document.body.removeChild(messageBox), 500);
-                        }, 4000);
-                        form.reset();
-                        document.querySelector('input[name="date"]').setAttribute('min', new Date().toISOString().split('T')[0]);
-                    } else {
-                        // If the script returns a specific error message, show it
-                        throw new Error(res.message || 'Form submission failed. Please check the details and try again.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    alert('There was an error sending your reservation. Please try again later.');
-                })
-                .finally(() => {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Send Request';
-                });
-            });
+            // --- SHOW SUCCESS MESSAGE AFTER REDIRECT ---
+            if (window.location.hash === '#success') {
+                const messageBox = document.createElement('div');
+                messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
+                messageBox.innerHTML = 'Thank you! Your request has been sent.';
+                document.body.appendChild(messageBox);
+                setTimeout(() => {
+                    messageBox.style.transition = 'opacity 0.5s';
+                    messageBox.style.opacity = '0';
+                    setTimeout(() => document.body.removeChild(messageBox), 500);
+                }, 4000);
+                // Clean the URL
+                history.replaceState(null, null, ' ');
+            }
             
             // --- FOOTER YEAR ---
             document.getElementById('year').textContent = new Date().getFullYear();
