@@ -334,51 +334,52 @@
             document.querySelector('input[name="date"]').setAttribute('min', today);
 
 
-            // --- BOOKING FORM TO GOOGLE SHEET ---
+            // --- BOOKING FORM TO GOOGLE SHEET (FINAL, RELIABLE VERSION) ---
             const bookingForm = document.getElementById('booking-form');
             bookingForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault();
 
                 const form = e.target;
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
                 const submitButton = form.querySelector('button');
                 
-                // --- THIS IS THE CORRECT, NEW SCRIPT URL ---
                 const scriptURL = 'https://script.google.com/macros/s/AKfycbz_moL7xt3LzaVQHh0Ro_e-T3zBi1sgXvA7LTnP46Nt0TosnArBWSNA8KClw1UNWkXReA/exec';
 
                 submitButton.disabled = true;
                 submitButton.textContent = 'SENDING...';
 
-                // We use a plain text POST request to avoid CORS issues with Google Scripts
                 fetch(scriptURL, {
                     method: 'POST',
-                    mode: 'no-cors', // Important: Use no-cors mode
+                    mode: 'cors', // Use cors mode for proper error handling
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'application/json', // Specify JSON content type
                     },
-                    body: new URLSearchParams(formData).toString()
+                    body: JSON.stringify(data) // Send data as a JSON string
                 })
-                .then(() => {
-                    // Because of 'no-cors' mode, we won't get a real response back.
-                    // We assume success and show the confirmation message.
-                    const name = data.name;
-                    const messageBox = document.createElement('div');
-                    messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
-                    messageBox.innerHTML = `Thank you, ${name}! Your request is sent.`;
-                    document.body.appendChild(messageBox);
-                    setTimeout(() => {
-                        messageBox.style.transition = 'opacity 0.5s';
-                        messageBox.style.opacity = '0';
-                        setTimeout(() => document.body.removeChild(messageBox), 500);
-                    }, 3000);
-                    form.reset();
-                    // Also reset the min date in case the user's browser session crosses midnight
-                    document.querySelector('input[name="date"]').setAttribute('min', new Date().toISOString().split('T')[0]);
+                .then(response => response.json())
+                .then(res => {
+                    if (res.result === 'success') {
+                        const name = data.name;
+                        const messageBox = document.createElement('div');
+                        messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
+                        messageBox.innerHTML = `Thank you, ${name}! Your request is sent.`;
+                        document.body.appendChild(messageBox);
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                            setTimeout(() => document.body.removeChild(messageBox), 500);
+                        }, 3000);
+                        form.reset();
+                        document.querySelector('input[name="date"]').setAttribute('min', new Date().toISOString().split('T')[0]);
+                    } else {
+                        // If the script returns a specific error message, show it
+                        throw new Error(res.message || 'Form submission failed. Please check the details and try again.');
+                    }
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert('There was an error sending your reservation. Please try again.');
+                    alert('There was an error sending your reservation. Please try again later.');
                 })
                 .finally(() => {
                     submitButton.disabled = false;
