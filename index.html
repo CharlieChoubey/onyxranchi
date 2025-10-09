@@ -329,6 +329,11 @@
                 observer.observe(section);
             });
 
+            // --- SET MINIMUM DATE FOR BOOKING ---
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelector('input[name="date"]').setAttribute('min', today);
+
+
             // --- BOOKING FORM TO GOOGLE SHEET ---
             const bookingForm = document.getElementById('booking-form');
             bookingForm.addEventListener('submit', function(e) {
@@ -353,23 +358,22 @@
                     },
                     body: JSON.stringify(data)
                 })
-                .then(response => response.json())
-                .then(res => {
-                    if (res.result === 'success') {
-                        const name = data.name;
-                        const messageBox = document.createElement('div');
-                        messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
-                        messageBox.innerHTML = `Thank you, ${name}! Your request is sent.`;
-                        document.body.appendChild(messageBox);
-                        setTimeout(() => {
-                            messageBox.style.transition = 'opacity 0.5s';
-                            messageBox.style.opacity = '0';
-                            setTimeout(() => document.body.removeChild(messageBox), 500);
-                        }, 3000);
-                        form.reset();
-                    } else {
-                        throw new Error('Form submission to Google Sheet failed.');
-                    }
+                .then(() => {
+                    // This block will run on a successful network request,
+                    // which is how we handle Google Scripts' response behavior.
+                    const name = data.name;
+                    const messageBox = document.createElement('div');
+                    messageBox.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #D4AF37; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; font-weight: bold;';
+                    messageBox.innerHTML = `Thank you, ${name}! Your request is sent.`;
+                    document.body.appendChild(messageBox);
+                    setTimeout(() => {
+                        messageBox.style.transition = 'opacity 0.5s';
+                        messageBox.style.opacity = '0';
+                        setTimeout(() => document.body.removeChild(messageBox), 500);
+                    }, 3000);
+                    form.reset();
+                    // Also reset the min date in case the user's browser session crosses midnight
+                    document.querySelector('input[name="date"]').setAttribute('min', new Date().toISOString().split('T')[0]);
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
