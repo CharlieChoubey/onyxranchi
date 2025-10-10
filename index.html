@@ -251,12 +251,29 @@
 
     <!-- Hidden iframe to capture form submission response -->
     <iframe name="hiddenConfirm" id="hiddenConfirm" style="display: none;"></iframe>
+
+    <!-- Instagram Modal -->
+    <div id="instagram-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-gray-900 border border-[#D4AF37]/50 rounded-lg p-8 max-w-sm w-full text-center relative transform scale-95 transition-transform duration-300">
+            <button id="close-modal" class="absolute top-2 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h3 class="text-2xl font-bold uppercase mb-2">Join the Vibe</h3>
+            <p class="text-gray-400 mb-6">Follow us on Instagram for the latest event updates, offers, and behind-the-scenes content.</p>
+            <a href="https://www.instagram.com/onyxranchi?utm_source=ig_web_button_share_sheet&igsh=bGhyOHVtcWlzdTZu" target="_blank" class="glow-button inline-block w-full uppercase font-bold bg-[#D4AF37] text-black py-3 px-6 rounded-sm">Follow Now</a>
+        </div>
+    </div>
     
     <!-- Footer --><footer class="bg-black py-12">
         <div class="container mx-auto px-6 text-center text-gray-500">
             <img src="Onyx Logo.jpg" alt="Onyx Logo" class="h-12 mx-auto mb-4"
             onerror="this.onerror=null; this.src='https://placehold.co/200x50/050505/D4AF37?text=ONYX';">
             <p>Lalpur, Ranchi, Jharkhand</p>
+            <div class="flex justify-center items-center space-x-4 my-4">
+                <a href="https://www.instagram.com/onyxranchi?utm_source=ig_web_button_share_sheet&igsh=bGhyOHVtcWlzdTZu" target="_blank" class="text-gray-400 hover:text-[#D4AF37] transition-colors" aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.315 2c-4.42 0-4.482.018-6.046.087-1.564.07-2.646.33-3.57.734a4.832 4.832 0 00-1.75 1.75c-.404.924-.664 2.006-.734 3.57C.018 7.833 0 7.895 0 12.315s.018 4.482.087 6.046c.07 1.564.33 2.646.734 3.57a4.832 4.832 0 001.75 1.75c.924.404 2.006.664 3.57.734 1.564.07 1.626.087 6.046.087s4.482-.018 6.046-.087c1.564-.07 2.646-.33 3.57-.734a4.832 4.832 0 001.75-1.75c.404-.924.664-2.006.734-3.57.07-1.564.087-1.626.087-6.046s-.018-4.482-.087-6.046c-.07-1.564-.33-2.646-.734-3.57a4.832 4.832 0 00-1.75-1.75c-.924-.404-2.006-.664-3.57-.734C16.797 2.018 16.735 2 12.315 2zm0 1.802c4.355 0 4.412.016 5.95.086 1.41.064 2.26.316 2.87.545.71.263 1.22.61 1.75 1.14.53.53.877 1.04 1.14 1.75.23.61.48 1.46.545 2.87.07 1.538.086 1.595.086 5.95s-.016 4.412-.086 5.95c-.064 1.41-.316 2.26-.545 2.87-.263.71-.61 1.22-1.14 1.75-.53.53-1.04.877-1.75 1.14-.61.23-1.46.48-2.87.545-1.538.07-1.595.086-5.95.086s-4.412-.016-5.95-.086c-1.41-.064-2.26-.316-2.87-.545-.71-.263-1.22-.61-1.75-1.14-.53-.53-.877-1.04-1.14-1.75-.23-.61-.48-1.46-.545-2.87-.07-1.538-.086-1.595-.086-5.95s.016-4.412.086-5.95c.064-1.41.316-2.26.545-2.87.263-.71.61-1.22 1.14-1.75.53-.53 1.04-.877 1.75-1.14.61-.23 1.46-.48 2.87-.545 1.538-.07 1.595-.086 5.95-.086zm0 11.235a4.42 4.42 0 110-8.84 4.42 4.42 0 010 8.84zm0-10.642a6.22 6.22 0 100 12.44 6.22 6.22 0 000-12.44zm6.2-2.185a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </div>
             <p class="mt-1">&copy; <span id="year"></span> Onyx Lounge & Bar. All Rights Reserved.</p>
         </div>
     </footer>
@@ -362,6 +379,38 @@
                 }, 500);
             });
             
+            // --- INSTAGRAM MODAL ---
+            const modal = document.getElementById('instagram-modal');
+            const closeModal = document.getElementById('close-modal');
+
+            // Show modal after 5 seconds, only if not already shown in this session
+            setTimeout(() => {
+                if (!sessionStorage.getItem('instaModalShown')) {
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                       modal.classList.remove('opacity-0');
+                       modal.querySelector('div').classList.remove('scale-95');
+                    }, 10); // small delay for transition
+                }
+            }, 5000);
+
+            function hideModal() {
+                modal.classList.add('opacity-0');
+                modal.querySelector('div').classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300); // match transition duration
+                sessionStorage.setItem('instaModalShown', 'true');
+            }
+
+            closeModal.addEventListener('click', hideModal);
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) {
+                    hideModal();
+                }
+            });
+
+
             // --- FOOTER YEAR ---
             document.getElementById('year').textContent = new Date().getFullYear();
 
