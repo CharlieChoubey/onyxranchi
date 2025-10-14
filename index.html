@@ -36,8 +36,8 @@
 
         /* --- Shimmering Gold Text --- */
         .shimmer-text {
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: 700;
+            font-family: 'Exo 2', sans-serif; /* Toned down font */
+            font-weight: 900;
             text-transform: uppercase;
             color: #E0E0E0;
             position: relative;
@@ -57,13 +57,48 @@
             background-clip: text;
             color: transparent;
             animation: shimmer 4s infinite linear;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); /* Softer gold glow */
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         @keyframes shimmer {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+
+        /* --- Easter Egg & Background 30 Animations --- */
+        .easter-egg {
+            position: absolute;
+            font-size: 3rem;
+            color: #D4AF37;
+            opacity: 0;
+            font-weight: 700;
+            animation: flash-fade 15s infinite;
+        }
+        
+        @keyframes flash-fade {
+            0% { opacity: 0; transform: scale(0.95); }
+            10% { opacity: 0.1; transform: scale(1); }
+            20% { opacity: 0.1; transform: scale(1); }
+            30% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 0; }
+        }
+
+        #background-30 {
+            animation: background-30-fade 10s infinite ease-in-out;
+        }
+
+        @keyframes background-30-fade {
+            0% { opacity: 0.05; }
+            50% { opacity: 0; }
+            100% { opacity: 0.05; }
+        }
+
+        /* Positioning the easter eggs */
+        #egg1 { top: 20%; left: 15%; animation-delay: 0s; }
+        #egg2 { top: 30%; right: 20%; animation-delay: 3s; font-size: 4rem; }
+        #egg3 { bottom: 40%; left: 30%; animation-delay: 7s; }
+        #egg4 { bottom: 25%; right: 35%; animation-delay: 11s; font-size: 2.5rem; }
+
 
         /* Custom glow button */
         .glow-button {
@@ -113,11 +148,16 @@
              <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('WhatsApp Image 2025-10-08 at 15.14.52_8bcc7c84.jpg');"></div>
                  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+                 <!-- Easter Eggs -->
+                 <div id="egg1" class="easter-egg">XXX</div>
+                 <div id="egg2" class="easter-egg">तीस</div>
+                 <div id="egg3" class="easter-egg">dreißig</div>
+                 <div id="egg4" class="easter-egg">تیس</div>
             </div>
 
             <div class="relative z-10 flex flex-col items-center">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span class="text-[25rem] md:text-[35rem] font-black text-white/5 tracking-tighter -mt-8">30</span>
+                    <span id="background-30" class="text-[25rem] md:text-[35rem] font-black text-white/5 tracking-tighter -mt-8">30</span>
                 </div>
                 <h1 class="shimmer-text text-5xl md:text-7xl lg:text-8xl leading-tight" data-text="Onyx is Arriving Soon">
                     <span class="block">Onyx is</span>
