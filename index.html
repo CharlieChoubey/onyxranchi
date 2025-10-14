@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700;900&family=Poppins:wght@300;400;600&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Custom styles to complement Tailwind CSS */
         body {
@@ -34,55 +34,36 @@
             transform: translateY(0);
         }
 
-        /* --- New Thunder Glitch Effect --- */
-        .glitch {
+        /* --- Shimmering Gold Text --- */
+        .shimmer-text {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #E0E0E0;
             position: relative;
-            color: #D4AF37; /* Gold color from logo */
-        }
-        .glitch-active span {
-            position: relative;
-            display: inline-block;
-            animation: thunder-shake 1.5s infinite;
-        }
-        .glitch-active span:nth-of-type(1) { animation-duration: 0.9s; animation-delay: 0.2s; }
-        .glitch-active span:nth-of-type(2) { animation-duration: 1.2s; animation-delay: -0.1s; }
-        .glitch-active span:nth-of-type(3) { animation-duration: 1.0s; animation-delay: 0.4s; }
-
-        @keyframes thunder-shake {
-            0%, 100% { transform: translate(0, 0) skew(0, 0); opacity: 1; }
-            5% { transform: translate(2px, -3px) skew(0, 2deg); }
-            10% { transform: translate(-1px, 2px) skew(-3deg, 0); }
-            15% { transform: translate(0, 0) skew(0, 0); }
-            40% { transform: translate(0, 0) skew(0, 0); opacity: 1; }
-            42% { opacity: 0.7; }
-            45% { opacity: 1; }
-            60% { transform: translate(3px, 1px) skew(3deg, 1deg); }
-            65% { transform: translate(0, 0) skew(0, 0); }
-            90% { transform: translate(-2px, -1px) skew(-1deg, 0); }
+            text-align: center;
         }
 
-        /* --- Shine Effect for after countdown --- */
-        @keyframes shine-effect {
-             0%, 100% { text-shadow: 0 0 8px #D4AF37, 0 0 16px #D4AF37, 0 0 24px #D4AF37; }
-             50% { text-shadow: 0 0 16px #D4AF37, 0 0 24px #D4AF37, 0 0 40px #D4AF37; }
-        }
-        .shine {
-            animation: shine-effect 2s infinite ease-in-out;
-        }
-
-        /* --- Fading Onix Background Animation --- */
-        #onix-background {
-            animation: background-fade 10s infinite ease-in-out;
-        }
-
-        @keyframes background-fade {
-            0% { opacity: 0; }
-            25% { opacity: 0.2; } /* Fade in */
-            50% { opacity: 0.2; } /* Hold */
-            75% { opacity: 0; }  /* Fade out */
-            100% { opacity: 0; } /* Hold */
+        .shimmer-text::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(110deg, transparent 30%, #D4AF37 50%, transparent 70%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 4s infinite linear;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); /* Softer gold glow */
         }
 
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
 
         /* Custom glow button */
         .glow-button {
@@ -131,25 +112,17 @@
         <!-- Hero Section --><section class="h-screen min-h-[700px] w-full flex flex-col items-center justify-center text-center relative px-4 overflow-hidden">
              <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('WhatsApp Image 2025-10-08 at 15.14.52_8bcc7c84.jpg');"></div>
-                <div id="onix-background" class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0" style="background-image: url('Onix.webp'); background-size: contain; background-position: center 80%;"></div>
-                <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+                 <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
             </div>
 
             <div class="relative z-10 flex flex-col items-center">
-                <h1 id="hero-glitch-text" class="glitch glitch-active text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase" data-text="ONYX HAS ARRIVED">
-                    <span>ONYX</span> <span>HAS</span> <span>ARRIVED</span>
-                </h1>
-                <p class="mt-4 text-base md:text-xl max-w-2xl text-gray-300">The future of fine dining and nightlife lands in the heart of Ranchi. Prepare for a sensory revolution.</p>
-                
-                <div class="mt-12">
-                    <h2 class="text-sm md:text-base uppercase tracking-widest text-gray-400 mb-4">Grand Opening Countdown</h2>
-                    <div id="countdown" class="grid grid-cols-4 gap-2 md:gap-4 text-center">
-                        <div><span id="days" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Days</span></div>
-                        <div><span id="hours" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Hours</span></div>
-                        <div><span id="minutes" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Mins</span></div>
-                        <div><span id="seconds" class="block text-3xl md:text-5xl font-bold text-[#D4AF37]">00</span><span class="text-xs uppercase">Secs</span></div>
-                    </div>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <span class="text-[25rem] md:text-[35rem] font-black text-white/5 tracking-tighter -mt-8">30</span>
                 </div>
+                <h1 class="shimmer-text text-5xl md:text-7xl lg:text-8xl leading-tight" data-text="Onyx is Arriving Soon">
+                    <span class="block">Onyx is</span>
+                    <span class="block">Arriving Soon</span>
+                </h1>
             </div>
         </section>
 
@@ -334,33 +307,7 @@
                 link.addEventListener('click', toggleMenu);
             });
 
-            // --- COUNTDOWN TIMER & GLITCH RESOLUTION ---
-            const countDownDate = new Date("Oct 18, 2025 19:00:00").getTime();
-            const heroGlitchText = document.getElementById('hero-glitch-text');
-
-            const countdownInterval = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countDownDate - now;
-
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    document.getElementById("countdown").innerHTML = `<div class="col-span-4 text-2xl font-bold uppercase text-white">Now Open</div>`;
-                    heroGlitchText.classList.remove('glitch-active'); // Remove glitch when open
-                    heroGlitchText.classList.add('shine'); // Add shine effect
-                    document.getElementById('onix-background').style.display = 'none'; // Hide Onix background
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById("days").innerText = days.toString().padStart(2, '0');
-                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
-            }, 1000);
+            // --- REMOVED COUNTDOWN LOGIC ---
 
             // --- FADE-IN ON SCROLL ---
             const sections = document.querySelectorAll('.fade-in-section');
@@ -445,6 +392,4 @@
 
 </body>
 </html>
-
-
 
