@@ -77,27 +77,28 @@
         
         @keyframes flash-fade {
             0% { opacity: 0; transform: scale(0.95); }
-            10% { opacity: 0.1; transform: scale(1); }
-            20% { opacity: 0.1; transform: scale(1); }
+            10% { opacity: 0.15; transform: scale(1); }
+            20% { opacity: 0.15; transform: scale(1); }
             30% { opacity: 0; transform: scale(0.95); }
             100% { opacity: 0; }
         }
 
         #background-30 {
-            animation: background-30-fade 10s infinite ease-in-out;
-        }
-
-        @keyframes background-30-fade {
-            0% { opacity: 0.05; }
-            50% { opacity: 0; }
-            100% { opacity: 0.05; }
+            animation: flash-fade 12s infinite ease-in-out;
+            animation-delay: 1s;
         }
 
         /* Positioning the easter eggs */
-        #egg1 { top: 20%; left: 15%; animation-delay: 0s; }
-        #egg2 { top: 30%; right: 20%; animation-delay: 3s; font-size: 4rem; }
-        #egg3 { bottom: 40%; left: 30%; animation-delay: 7s; }
-        #egg4 { bottom: 25%; right: 35%; animation-delay: 11s; font-size: 2.5rem; }
+        #egg1 { top: 15%; left: 10%; animation-delay: 0s; }
+        #egg2 { top: 25%; right: 15%; animation-delay: 3s; font-size: 4rem; }
+        #egg3 { bottom: 35%; left: 5%; animation-delay: 7s; }
+        #egg4 { bottom: 20%; right: 10%; animation-delay: 11s; font-size: 2.5rem; }
+        #egg5 { top: 55%; left: 15%; animation-delay: 2s; font-size: 2.8rem; }
+        #egg6 { top: 70%; right: 20%; animation-delay: 5s; }
+        #egg7 { bottom: 10%; left: 25%; animation-delay: 9s; }
+        #egg8 { top: 10%; right: 35%; animation-delay: 13s; font-size: 3.5rem; }
+        #egg9 { bottom: 5%; left: 45%; animation-delay: 4s; }
+        #egg10 { top: 45%; right: 5%; animation-delay: 8s; font-size: 3.2rem; }
 
 
         /* Custom glow button */
@@ -153,11 +154,17 @@
                  <div id="egg2" class="easter-egg">तीस</div>
                  <div id="egg3" class="easter-egg">dreißig</div>
                  <div id="egg4" class="easter-egg">تیس</div>
+                 <div id="egg5" class="easter-egg">treinta</div>
+                 <div id="egg6" class="easter-egg">trente</div>
+                 <div id="egg7" class="easter-egg">trenta</div>
+                 <div id="egg8" class="easter-egg">тридцать</div>
+                 <div id="egg9" class="easter-egg">三十</div>
+                 <div id="egg10" class="easter-egg">서른</div>
             </div>
 
             <div class="relative z-10 flex flex-col items-center">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span id="background-30" class="text-[25rem] md:text-[35rem] font-black text-white/5 tracking-tighter -mt-8">30</span>
+                    <span id="background-30" class="text-[25rem] md:text-[35rem] font-black text-white tracking-tighter -mt-8 opacity-0">30</span>
                 </div>
                 <h1 class="shimmer-text text-5xl md:text-7xl lg:text-8xl leading-tight" data-text="Onyx is Arriving Soon">
                     <span class="block">Onyx is</span>
@@ -346,8 +353,6 @@
             mobileMenuLinks.forEach(link => {
                 link.addEventListener('click', toggleMenu);
             });
-
-            // --- REMOVED COUNTDOWN LOGIC ---
 
             // --- FADE-IN ON SCROLL ---
             const sections = document.querySelectorAll('.fade-in-section');
