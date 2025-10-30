@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onyx | Lounge & Bar - Ranchi</title>
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Onyx Family Lounge & Bar is a premium fine dining restaurant in Lalpur, Ranchi. Experience futuristic design, techno parties, and reserve your table today.">
+    <!-- SEO Meta Tags --><meta name="description" content="Onyx Family Lounge & Bar is a premium fine dining restaurant in Lalpur, Ranchi. Experience futuristic design, techno parties, and reserve your table today.">
     <meta name="keywords" content="Onyx Ranchi, fine dining Ranchi, lounge and bar Ranchi, techno party Ranchi, boiler room Ranchi, best restaurant in Lalpur">
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="Gemini_Generated_Image_phpis6phpis6phpi.jpg?v=2">
+    <!-- Favicon --><link rel="icon" type="image/jpeg" href="Gemini_Generated_Image_phpis6phpis6phpi.jpg?v=2">
     <link rel="shortcut icon" type="image/jpeg" href="Gemini_Generated_Image_phpis6phpis6phpi.jpg?v=2">
-    <!-- Stylesheets and Fonts -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Stylesheets and Fonts --><script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700;900&family=Poppins:wght@300;400;600&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
@@ -78,34 +75,35 @@
             opacity: 0;
             font-weight: 700;
             animation: flash-fade-november 18s infinite; /* Longer duration */
+            pointer-events: none; /* Make sure they don't block clicks */
         }
         
         @keyframes flash-fade-november {
-            0% { opacity: 0; transform: scale(0.95); }
-            8% { opacity: 0.12; transform: scale(1); } /* Slightly more visible */
-            16% { opacity: 0.12; transform: scale(1); }
-            24% { opacity: 0; transform: scale(0.95); }
+            0% { opacity: 0; transform: scale(0.95) translate(-50%, -50%); } /* Added centering */
+            8% { opacity: 0.12; transform: scale(1) translate(-50%, -50%); } /* Slightly more visible */
+            16% { opacity: 0.12; transform: scale(1) translate(-50%, -50%); }
+            24% { opacity: 0; transform: scale(0.95) translate(-50%, -50%); }
             100% { opacity: 0; }
         }
 
-        /* Positioning the November easter eggs */
-        #egg-xi { top: 15%; left: 10%; animation-delay: 0s; }
-        #egg-noshave { top: 25%; right: 15%; animation-delay: 3s; font-size: 4rem; }
-        #egg-11 { bottom: 35%; left: 5%; animation-delay: 6s; }
-        #egg-leaf { bottom: 20%; right: 10%; animation-delay: 9s; font-size: 3.5rem; }
-        #egg-november { top: 55%; left: 15%; animation-delay: 12s; font-size: 2.8rem; }
-        #egg-scorpio { top: 70%; right: 20%; animation-delay: 15s; }
-        #egg-sagittarius { bottom: 10%; left: 25%; animation-delay: 1s; } /* Adjusted delays */
+        /* Positioning the November easter eggs - Adjusted for better spacing */
+        #egg-xi { top: 15%; left: 15%; animation-delay: 0s; }
+        #egg-noshave { top: 30%; right: 10%; animation-delay: 3s; font-size: 4rem; }
+        #egg-11 { bottom: 15%; left: 8%; animation-delay: 6s; }
+        #egg-leaf { bottom: 10%; right: 12%; animation-delay: 9s; font-size: 3.5rem; }
+        #egg-november { top: 75%; left: 18%; animation-delay: 12s; font-size: 2.8rem; }
+        #egg-scorpio { top: 80%; right: 15%; animation-delay: 15s; }
+        #egg-sagittarius { top: 5%; left: 40%; animation-delay: 1s; } 
         #egg-onix { 
-            top: 40%; /* Adjust as needed */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Precise centering */
-            width: 150px; /* Adjust size */
+            top: 70%; /* Adjusted higher to be more central in lower half */
+            left: 50%; 
+            width: 300px; /* Made significantly larger */
             height: auto;
-            animation-delay: 4s; /* Give it a unique delay */
+            animation-delay: 4s; 
+            transform: translateX(-50%); /* Only horizontal centering needed now */
         }
         #egg-onix img {
-             filter: grayscale(80%) brightness(0.5); /* Make it dark and subtle */
+             /* filter: grayscale(80%) brightness(0.5); Removed as background is transparent */
         }
       
 
@@ -157,22 +155,22 @@
              <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('WhatsApp Image 2025-10-08 at 15.14.52_8bcc7c84.jpg');"></div>
                  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-                 <!-- November Easter Eggs -->
-                 <div id="egg-xi" class="november-egg">XI</div>
-                 <div id="egg-noshave" class="november-egg">🚫🪒</div>
-                 <div id="egg-11" class="november-egg">11</div>
-                 <div id="egg-leaf" class="november-egg">🍂</div>
-                 <div id="egg-november" class="november-egg">November</div>
-                 <div id="egg-scorpio" class="november-egg">♏</div>
-                 <div id="egg-sagittarius" class="november-egg">♐</div>
-                 <div id="egg-onix" class="november-egg">
-                     <img src="Onix.webp" alt="Onix hint" class="w-full h-auto">
+                 <!-- November Easter Eggs Container --><div class="absolute inset-0 overflow-hidden">
+                     <div id="egg-xi" class="november-egg">XI</div>
+                     <div id="egg-noshave" class="november-egg">🚫🪒</div>
+                     <div id="egg-11" class="november-egg">11</div>
+                     <div id="egg-leaf" class="november-egg">🍂</div>
+                     <div id="egg-november" class="november-egg">November</div>
+                     <div id="egg-scorpio" class="november-egg">♏</div>
+                     <div id="egg-sagittarius" class="november-egg">♐</div>
+                     <div id="egg-onix" class="november-egg">
+                         <img src="Onix_new.webp" alt="Onix hint" class="w-full h-auto">
+                     </div>
                  </div>
             </div>
 
             <div class="relative z-10 flex flex-col items-center">
-                 <!-- Removed the large background 30 -->
-                <h1 class="shimmer-text text-5xl md:text-7xl lg:text-8xl leading-tight" data-text="The Next Chapter Begins November">
+                 <!-- Main Hero Text --><h1 class="shimmer-text text-5xl md:text-7xl lg:text-8xl leading-tight" data-text="The Next Chapter Begins November">
                     <span class="block">The Next Chapter</span>
                     <span class="block">Begins November</span>
                 </h1>
@@ -252,8 +250,7 @@
                 </div>
 
                 <div class="mt-12 max-w-xl mx-auto">
-                    <!-- The form now submits to a hidden iframe to prevent the user from leaving the page -->
-                    <form id="booking-form" method="POST" action="https://script.google.com/macros/s/AKfycbyppJEUp04yG8fq0hVkFycin1JgrneSPbMLzCQQfkMqj8oIlC2sObw3kossvoI9iWLP/exec" target="hiddenConfirm" class="space-y-4">
+                    <!-- The form now submits to a hidden iframe to prevent the user from leaving the page --><form id="booking-form" method="POST" action="https://script.google.com/macros/s/AKfycbyppJEUp04yG8fq0hVkFycin1JgrneSPbMLzCQQfkMqj8oIlC2sObw3kossvoI9iWLP/exec" target="hiddenConfirm" class="space-y-4">
                         <div>
                             <input type="text" name="name" placeholder="Full Name" required class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all">
                         </div>
@@ -290,11 +287,9 @@
 
     </main>
 
-    <!-- Hidden iframe to capture form submission response -->
-    <iframe name="hiddenConfirm" id="hiddenConfirm" style="display: none;"></iframe>
+    <!-- Hidden iframe to capture form submission response --><iframe name="hiddenConfirm" id="hiddenConfirm" style="display: none;"></iframe>
 
-    <!-- Instagram Modal -->
-    <div id="instagram-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+    <!-- Instagram Modal --><div id="instagram-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-gray-900 border border-[#D4AF37]/50 rounded-lg p-8 max-w-sm w-full text-center relative transform scale-95 transition-transform duration-300">
             <button id="close-modal" class="absolute top-2 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
             <h3 class="text-2xl font-bold uppercase mb-2">Join the Vibe</h3>
