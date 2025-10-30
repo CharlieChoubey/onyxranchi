@@ -70,41 +70,44 @@
             100% { background-position: -200% 0; }
         }
 
-        /* --- Easter Egg & Background 30 Animations --- */
-        .easter-egg {
+        /* --- November Easter Egg Animations --- */
+        .november-egg {
             position: absolute;
             font-size: 3rem;
-            color: #D4AF37;
+            color: #D4AF37; /* Gold color */
             opacity: 0;
             font-weight: 700;
-            animation: flash-fade 15s infinite;
+            animation: flash-fade-november 18s infinite; /* Longer duration */
         }
         
-        @keyframes flash-fade {
+        @keyframes flash-fade-november {
             0% { opacity: 0; transform: scale(0.95); }
-            10% { opacity: 0.15; transform: scale(1); }
-            20% { opacity: 0.15; transform: scale(1); }
-            30% { opacity: 0; transform: scale(0.95); }
+            8% { opacity: 0.12; transform: scale(1); } /* Slightly more visible */
+            16% { opacity: 0.12; transform: scale(1); }
+            24% { opacity: 0; transform: scale(0.95); }
             100% { opacity: 0; }
         }
 
-        #background-30 {
-            animation: flash-fade 12s infinite ease-in-out;
-            animation-delay: 1s;
+        /* Positioning the November easter eggs */
+        #egg-xi { top: 15%; left: 10%; animation-delay: 0s; }
+        #egg-noshave { top: 25%; right: 15%; animation-delay: 3s; font-size: 4rem; }
+        #egg-11 { bottom: 35%; left: 5%; animation-delay: 6s; }
+        #egg-leaf { bottom: 20%; right: 10%; animation-delay: 9s; font-size: 3.5rem; }
+        #egg-november { top: 55%; left: 15%; animation-delay: 12s; font-size: 2.8rem; }
+        #egg-scorpio { top: 70%; right: 20%; animation-delay: 15s; }
+        #egg-sagittarius { bottom: 10%; left: 25%; animation-delay: 1s; } /* Adjusted delays */
+        #egg-onix { 
+            top: 40%; /* Adjust as needed */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Precise centering */
+            width: 150px; /* Adjust size */
+            height: auto;
+            animation-delay: 4s; /* Give it a unique delay */
         }
-
-        /* Positioning the easter eggs */
-        #egg1 { top: 15%; left: 10%; animation-delay: 0s; }
-        #egg2 { top: 25%; right: 15%; animation-delay: 3s; font-size: 4rem; }
-        #egg3 { bottom: 35%; left: 5%; animation-delay: 7s; }
-        #egg4 { bottom: 20%; right: 10%; animation-delay: 11s; font-size: 2.5rem; }
-        #egg5 { top: 55%; left: 15%; animation-delay: 2s; font-size: 2.8rem; }
-        #egg6 { top: 70%; right: 20%; animation-delay: 5s; }
-        #egg7 { bottom: 10%; left: 25%; animation-delay: 9s; }
-        #egg8 { top: 10%; right: 35%; animation-delay: 13s; font-size: 3.5rem; }
-        #egg9 { bottom: 5%; left: 45%; animation-delay: 4s; }
-        #egg10 { top: 45%; right: 5%; animation-delay: 8s; font-size: 3.2rem; }
-
+        #egg-onix img {
+             filter: grayscale(80%) brightness(0.5); /* Make it dark and subtle */
+        }
+      
 
         /* Custom glow button */
         .glow-button {
@@ -154,26 +157,24 @@
              <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('WhatsApp Image 2025-10-08 at 15.14.52_8bcc7c84.jpg');"></div>
                  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-                 <!-- Easter Eggs -->
-                 <div id="egg1" class="easter-egg">XXX</div>
-                 <div id="egg2" class="easter-egg">तीस</div>
-                 <div id="egg3" class="easter-egg">dreißig</div>
-                 <div id="egg4" class="easter-egg">تیس</div>
-                 <div id="egg5" class="easter-egg">treinta</div>
-                 <div id="egg6" class="easter-egg">trente</div>
-                 <div id="egg7" class="easter-egg">trenta</div>
-                 <div id="egg8" class="easter-egg">тридцать</div>
-                 <div id="egg9" class="easter-egg">三十</div>
-                 <div id="egg10" class="easter-egg">서른</div>
+                 <!-- November Easter Eggs -->
+                 <div id="egg-xi" class="november-egg">XI</div>
+                 <div id="egg-noshave" class="november-egg">🚫🪒</div>
+                 <div id="egg-11" class="november-egg">11</div>
+                 <div id="egg-leaf" class="november-egg">🍂</div>
+                 <div id="egg-november" class="november-egg">November</div>
+                 <div id="egg-scorpio" class="november-egg">♏</div>
+                 <div id="egg-sagittarius" class="november-egg">♐</div>
+                 <div id="egg-onix" class="november-egg">
+                     <img src="Onix.webp" alt="Onix hint" class="w-full h-auto">
+                 </div>
             </div>
 
             <div class="relative z-10 flex flex-col items-center">
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span id="background-30" class="text-[25rem] md:text-[35rem] font-black text-white tracking-tighter -mt-8 opacity-0">30</span>
-                </div>
-                <h1 class="shimmer-text text-5xl md:text-7xl lg:text-8xl leading-tight" data-text="Onyx is Arriving Soon">
-                    <span class="block">Onyx is</span>
-                    <span class="block">Arriving Soon</span>
+                 <!-- Removed the large background 30 -->
+                <h1 class="shimmer-text text-5xl md:text-7xl lg:text-8xl leading-tight" data-text="The Next Chapter Begins November">
+                    <span class="block">The Next Chapter</span>
+                    <span class="block">Begins November</span>
                 </h1>
             </div>
         </section>
